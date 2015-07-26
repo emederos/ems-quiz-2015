@@ -14,8 +14,9 @@ exports.load = function(req,res, next, quizId) {
 
 // GET /quizes
 exports.index = function(req,res) {
-    swhere = req.query.search.replace(/\s{1,}/g,"%");
-    models.Quiz.findAll({where: ["pregunta like ?","%"+swhere+"%"]})
+    swhere = (req.query.search || "").replace(/\s{1,}/g,"%");
+    models.Quiz.findAll({where: ["pregunta like ?","%"+swhere+"%"],
+                         order: [["pregunta","ASC"]]})
         .then(function(quizes) {
             res.render('quizes/index.ejs', { quizes:quizes });
     }).catch(function(error) { next(error);});
