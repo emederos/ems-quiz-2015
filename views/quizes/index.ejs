@@ -5,10 +5,13 @@
 <% if (quizes.length) { %>
 
 <table class="main">
-<thead><tr><th>Preguntas encontradas:</th></tr></thead>
+<thead><tr><th colspan="2">Preguntas encontradas:</th></tr></thead>
 <tbody>
 <% var i; for (i=0; i < quizes.length; i++) {%>
-    <tr><td><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
+    <tr>
+    <td><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
+    <td><a href="/quizes/<%= quizes[i].id %>/edit"><button type="button">editar</button></a></td>
+    </tr>
 <% } %>
 </tbody></table>
 <p><a href="/quizes/new"><button type="button">Crear pregunta</button></a></p>
