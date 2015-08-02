@@ -4,5 +4,27 @@
 <label for="resp" class="rem">Respuesta</label>
 <input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/>
 <p>
+<label for="tema" class="rem">Tema</label>
+<select id="tema" name="quiz[tema]">
+  <option value="otro" name="otro">
+    Otro</option>
+  <option value="humanidades" name="humanidades">
+    Humanidades</option>
+  <option value="ocio" name="ocio">
+    Ocio</option>
+  <option value="ciencia" name="ciencia">
+    Ciencia</option>
+  <option value="tecnologia" name="tecnologia">
+    Tecnología</option>
+</select>
+
+<script language="javascript">
+    // Para garantizar que aparece seleccionado el valor adecuado.
+    if (!this.tema_selected) {
+       document.getElementById('tema').options['<%= quiz.tema %>'].selected=true;
+       this.tema_selected = true;
+    }
+</script>
+<p>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar"/>
