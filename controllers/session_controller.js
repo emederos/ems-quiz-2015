@@ -13,8 +13,6 @@ exports.create = function(req, res) {
 
     var userController = require('./user_controller');
 
-    console.log(req.body);
-
     userController.autenticar(login, passwd, function (error, user) {
         if (error) {
             req.session.errors = [{"message": 'Se ha producido un error: '+error}];
@@ -23,8 +21,6 @@ exports.create = function(req, res) {
         }
         // Crear req.session.user y guardar campos id y username
         req.session.user = {id:user.id, username:user.username};
-        console.log('req.session ->');
-        console.log(req.session);
         res.redirect(req.session.redir.toString());
     });
 };
@@ -33,5 +29,14 @@ exports.create = function(req, res) {
 exports.destroy = function(req, res) {
     delete req.session.user;
     res.redirect(req.session.redir.toString());
+};
+
+// MW de autorización de accesos HTTP restringidos
+exports.loginRequired = function(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
 };
 
