@@ -13,5 +13,6 @@ nav span {margin: 0px 10px 0px 0px; }
 
 /* table.main { width: 100%; } */
 table.main th { border: 1px solid black; }
+.right { float: right; }
 
 #ErrorMsgs { color: #f61; font-size: smaller }
