@@ -38,6 +38,23 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Middleware para auto-logout
+app.use(function(req, res, next) {
+    if (req.session.time) {
+        // Ya se fijó el inicio de sesión
+        // Hay que hacer la comparativa.
+        d=(new Date()).getTime()-(new Date(req.session.time)).getTime();
+        if (d/1000 > 20) {
+            delete req.session.user;
+            delete req.session.time;
+        } else {
+            // Refrescamos la vida del timer.
+            req.session.time=(new Date()).toUTCString();
+        }
+    } 
+    next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler

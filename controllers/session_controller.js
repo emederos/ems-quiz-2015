@@ -21,6 +21,9 @@ exports.create = function(req, res) {
         }
         // Crear req.session.user y guardar campos id y username
         req.session.user = {id:user.id, username:user.username};
+        // Añadir control de tiempo.
+        req.session.time = new Date();
+        req.session.time = req.session.time.toUTCString();
         res.redirect(req.session.redir.toString());
     });
 };
@@ -28,6 +31,7 @@ exports.create = function(req, res) {
 // DELETE /logout -- destruir sesión.
 exports.destroy = function(req, res) {
     delete req.session.user;
+    delete req.session.time;
     res.redirect(req.session.redir.toString());
 };
 
