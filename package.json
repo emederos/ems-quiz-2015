@@ -24,7 +24,7 @@
     "morgan": ">=1.9.1",
     "pg": "^4.1.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.4.1",
+    "sequelize": "^6.3.5",
     "sequelize-cli": "^1.7.2",
     "serve-favicon": "~2.1.3"
   }
